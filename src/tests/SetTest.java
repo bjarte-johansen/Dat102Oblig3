@@ -38,6 +38,14 @@ class SetTest {
 		return set;
 	}
 	
+	protected MengdeADT<Integer> makeSet() { return makeSet(new Integer[] {}); }
+	protected MengdeADT<Integer> makeSet(Integer a) { return makeSet(new Integer[] {a}); }
+	protected MengdeADT<Integer> makeSet(Integer a, Integer b) { return makeSet(new Integer[] {a,b}); }
+	protected MengdeADT<Integer> makeSet(Integer a, Integer b, Integer c) { return makeSet(new Integer[] {a,b,c}); }
+	protected MengdeADT<Integer> makeSet(Integer a, Integer b, Integer c, Integer d) { return makeSet(new Integer[] {a,b,c,d}); }
+	protected MengdeADT<Integer> makeSet(Integer a, Integer b, Integer c, Integer d, Integer e) { return makeSet(new Integer[] {a,b,c,d,e}); }
+	protected MengdeADT<Integer> makeSet(Integer a, Integer b, Integer c, Integer d, Integer e, Integer f) { return makeSet(new Integer[] {a,b,c,d,e,f}); }
+		
 	protected Integer[] makeArray() { return new Integer[] {}; }
 	protected Integer[] makeArray(Integer a) { return new Integer[] {a}; }
 	protected Integer[] makeArray(Integer a, Integer b) { return new Integer[] {a,b}; }
@@ -46,14 +54,7 @@ class SetTest {
 	protected Integer[] makeArray(Integer a, Integer b, Integer c, Integer d, Integer e) { return new Integer[] {a,b,c,d,e}; }
 	protected Integer[] makeArray(Integer a, Integer b, Integer c, Integer d, Integer e, Integer f) { return new Integer[] {a,b,c,d,e,f}; }
 	
-	protected MengdeADT<Integer> makeSet() { return makeSet(new Integer[] {}); }
-	protected MengdeADT<Integer> makeSet(Integer a) { return makeSet(new Integer[] {a}); }
-	protected MengdeADT<Integer> makeSet(Integer a, Integer b) { return makeSet(new Integer[] {a,b}); }
-	protected MengdeADT<Integer> makeSet(Integer a, Integer b, Integer c) { return makeSet(new Integer[] {a,b,c}); }
-	protected MengdeADT<Integer> makeSet(Integer a, Integer b, Integer c, Integer d) { return makeSet(new Integer[] {a,b,c,d}); }
-	protected MengdeADT<Integer> makeSet(Integer a, Integer b, Integer c, Integer d, Integer e) { return makeSet(new Integer[] {a,b,c,d,e}); }
-	protected MengdeADT<Integer> makeSet(Integer a, Integer b, Integer c, Integer d, Integer e, Integer f) { return makeSet(new Integer[] {a,b,c,d,e,f}); }
-	
+
 	protected <T> MengdeADT<Integer> makeEmptySet(){
 		// older method superseeded by makesET, used early on
 		return new TabellMengde<Integer>();
@@ -517,9 +518,13 @@ class SetTest {
 	void testAllFrom() {
 		{
 			MengdeADT<Integer> set = makeSet(1, 2);
-			set.addAllFrom(makeSet(1, 2, 3, 4));
+			set.addAllFrom(makeSet(3, 4));
 			assertEquals(set.count(), 4);
 			assertArrayEquals(set.toArray(), makeArray(1, 2, 3, 4));
+			
+			set.addAllFrom(makeSet(3, 4, 5, 6));
+			assertEquals(set.count(), 6);
+			assertArrayEquals(set.toArray(), makeArray(1, 2, 3, 4, 5, 6));			
 		}			
 	}
 }
