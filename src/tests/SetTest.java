@@ -24,12 +24,17 @@ import adt.MengdeADT;
  * tester da vi allerede hadde rundet 500 linjer med kode i enhetstest. Metoder som 
  * ikke er dekket med egen funksjon er dekket under andre tester mener vi. 
  * 
- * - testThrowNullPointerException() sjekker at metoder som tar et sett som argument
+ * Note: testThrowNullPointerException() sjekker at metoder som tar et sett som argument
  * kaster NullPointerException hvis argumentet er null.
  * 
- * - scoped variables er brukt i { statement-list } blokker for å tillate redeklarasjon
+ * Note: scoped variables er brukt i { statement-list } blokker for å tillate redeklarasjon
  * av variabler i samme metode / funksjon 
+ * 
+ * Note: Noen av testene er i en loop som kjører to ganger, eller har duplikat av add/remove
+ * etc; dette er ikke feil, det er for å teste LenkedMengde bedre for å avdekke problemer
+ * med remove/head/add.
  */
+
 class SetTest {	
 	/*
 	 */	
@@ -448,6 +453,8 @@ class SetTest {
 	@Test
 	void testAddRemove() {
 		{
+			// test removing in order and out of order
+			// to check test LenkedMengde better
 			MengdeADT<Integer> set = makeSet();
 			set.add(1);
 			set.add(2);
