@@ -33,6 +33,10 @@ import adt.MengdeADT;
  * Note: Noen av testene er i en loop som kjører to ganger, eller har duplikat av add/remove
  * etc; dette er ikke feil, det er for å teste LenkedMengde bedre for å avdekke problemer
  * med remove/head/add.
+ * 
+ * Note: Tester er merket med {}, {a, b}, {b, c} selv om testen kan inneholde flere variabler
+ * i selve testen. Det er for å vise mønster til typen test; det er ikke meningen kode må være eksakt
+ * lik, feks {a,b} disjoint {b,c} kan testes med makeSet(1,2,3).disjoint(makeSet(2,3,4)).  
  */
 
 class SetTest {	
@@ -75,9 +79,9 @@ class SetTest {
 		// older method superseeded by makeArray, used early on
 		return new Integer[] {};
 	}
-	
-	
-	
+
+
+
 	/**
 	 * 
 	 */
@@ -92,8 +96,7 @@ class SetTest {
 			assertFalse(set.isEmpty(), "isEmpty() failed");
 			set.remove(5);
 		}
-	}
-	
+	}	
 	
 	@Test 
 	public void testDisjoint(){
@@ -189,7 +192,6 @@ class SetTest {
 			assertArrayEquals(set1.union(set2).toArray(), new Integer[] {1,2,3,4,5,6});
 		}	
 	}
-
 	
 	@Test
 	void testIntersection() {
@@ -268,7 +270,6 @@ class SetTest {
             assertArrayEquals(set1.difference(set2).toArray(), makeEmptyArray());
         }
 	}
-	
 
 	@Test
 	void testIsEqual() {
@@ -341,7 +342,6 @@ class SetTest {
 			assertTrue(set1.isSubsetOf(set2));
 		}			
 	}
-	
 	
 	@Test
 	void testContains() {
@@ -510,6 +510,8 @@ class SetTest {
             assertArrayEquals(set.toArray(), makeEmptyArray());
         }
 	}
+	
+	@Test
 	void testMakeArray() {
 		{
             Integer[] arr = makeArray(1, 2, 3);
