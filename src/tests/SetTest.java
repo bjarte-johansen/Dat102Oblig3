@@ -473,4 +473,15 @@ class SetTest {
 			assertArrayEquals(set.toArray(), makeArray(1, 2, 3, 4, 5, 6));			
 		}			
 	}
+	
+	@Test
+	void testThrowNullPointerException() {
+		MengdeADT<Integer> set = makeSet(1, 2);
+        assertThrows(NullPointerException.class, () -> set.addAllFrom(null));
+        assertThrows(NullPointerException.class, () -> set.isDisjoint(null));
+        assertThrows(NullPointerException.class, () -> set.isEqual(null));
+        assertThrows(NullPointerException.class, () -> set.intersection(null));
+        assertThrows(NullPointerException.class, () -> set.union(null));
+        assertThrows(NullPointerException.class, () -> set.difference(null));
+	}
 }
