@@ -24,20 +24,7 @@ import adt.MengdeADT;
  * tester da vi allerede hadde rundet 500 linjer med kode i enhetstest. Metoder som 
  * ikke er dekket med egen funksjon er dekket under andre tester mener vi. 
  */
-class SetTest {
-	// navngiving vi skulle ønsket vi kunne brukt
-	// class ArraySet<T> extends TabellMengde<T>{};
-	// class ForwardLinkedSet<T> extends LenketMengde<T>{};
-	
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@BeforeEach
-	void setUp() throws Exception {
-	}
-
-
-	
+class SetTest {	
 	/*
 	 */	
 	
