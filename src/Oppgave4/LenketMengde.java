@@ -160,6 +160,7 @@ public class LenketMengde<T> implements MengdeADT<T>{
 		
 		LenketMengde<T> result = new LenketMengde<T>();
 		
+		/*
 		// by copying elements to array, we can avoid adding backwards
 		// to our list so we avoid ordering issues
 		T[] arr = this.toArray();
@@ -168,9 +169,9 @@ public class LenketMengde<T> implements MengdeADT<T>{
 			if (other.contains(arr[i])) {
 				result.add(arr[i]);
 			}
-		}
+		}*/
 		
-		/*
+
 		Node<T> current = mFirst;		
 		while(current != null) {
 			if (other.contains(current.data)) {
@@ -178,7 +179,6 @@ public class LenketMengde<T> implements MengdeADT<T>{
 			}
 			current = current.next;
 		}
-		*/
 		
 		return result;
 	}
@@ -215,6 +215,7 @@ public class LenketMengde<T> implements MengdeADT<T>{
 
 		LenketMengde<T> result = new LenketMengde<T>();
 		
+		/*
 		// by copying elements to array, we can avoid adding backwards
 		// to our list so we avoid ordering issues
 		T[] arr = this.toArray();
@@ -224,8 +225,8 @@ public class LenketMengde<T> implements MengdeADT<T>{
 				result.add(arr[i]);
 			}
 		}
+		*/
 		
-		/*
 		Node<T> current = mFirst;
 		while(current != null) {
 			if (!other.contains(current.data)) {
@@ -233,7 +234,6 @@ public class LenketMengde<T> implements MengdeADT<T>{
 			}
 			current = current.next;
 		}
-		*/
 		
 		return result;
 	}

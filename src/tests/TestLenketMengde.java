@@ -187,7 +187,6 @@ class TestLenketMengde {
 			// {} union {} = {}
 			MengdeADT<Integer> set1 = makeEmptySet();
 			MengdeADT<Integer> set2 = makeEmptySet();
-			//assertArrayEquals(set1.union(set2).toArray(), makeEmptyArray());
 			assertSetEquals(makeSet(), set1.union(set2)); 
 		}	
 		
@@ -195,7 +194,6 @@ class TestLenketMengde {
 			// {} union {a,b} = {a,b}
 			MengdeADT<Integer> set1 = makeEmptySet();
 			MengdeADT<Integer> set2 = makeSet(1,2,3);		
-			//assertArrayEquals(set1.union(set2).toArray(), makeArray(1,2,3));
 			assertSetEquals(makeSet(1,2,3), set1.union(set2));
 		}	
 				
@@ -204,7 +202,6 @@ class TestLenketMengde {
 			// {a,b} union {} = {a,b}
 			MengdeADT<Integer> set1 = makeSet(1,2,3);
 			MengdeADT<Integer> set2 = makeEmptySet();
-			//assertArrayEquals(set1.union(set2).toArray(), makeArray(1,2,3));
 			assertSetEquals(makeSet(1,2,3), set1.union(set2));
 		}	
 		
@@ -212,15 +209,13 @@ class TestLenketMengde {
 			// {a,b} union {b,c} = {a,b,c}
 			MengdeADT<Integer> set1 = makeSet(1,2,3);
 			MengdeADT<Integer> set2 = makeSet(3,4,5);		
-			//assertArrayEquals(set1.union(set2).toArray(), makeArray(1,2,3,4,5));
 			assertSetEquals(makeSet(1,2,3,4,5), set1.union(set2));
 		}	
 		
 		{
 			// {a,b} union {c,d} = {a,b,c,d}
 			MengdeADT<Integer> set1 = makeSet(1,2,3);
-			MengdeADT<Integer> set2 = makeSet(4,5,6);		
-			//assertArrayEquals(set1.union(set2).toArray(), makeArray(1,2,3,4,5,6));
+			MengdeADT<Integer> set2 = makeSet(4,5,6);					
 			assertSetEquals(makeSet(1,2,3,4,5,6), set1.union(set2));
 		}	
 	}
@@ -231,8 +226,7 @@ class TestLenketMengde {
 		{
 			// {} intersect {} = {}
 			MengdeADT<Integer> set1 = makeSet();
-			MengdeADT<Integer> set2 = makeSet();		
-			//assertArrayEquals(set1.intersection(set2).toArray(), makeEmptyArray());
+			MengdeADT<Integer> set2 = makeSet();					
 			assertSetEquals(makeSet(), set1.intersection(set2));
 		}
 		
@@ -240,7 +234,6 @@ class TestLenketMengde {
 			// {a,b} intersect {c,d} = {}
 			MengdeADT<Integer> set1 = makeSet(1,2,3);
 			MengdeADT<Integer> set2 = makeSet(4,5,6);		
-			//assertArrayEquals(set1.intersection(set2).toArray(), makeEmptyArray());
 			assertSetEquals(makeSet(), set1.intersection(set2));
 		}
 		
@@ -248,16 +241,14 @@ class TestLenketMengde {
 		{
 			// {a,b} intersect {a,b} = {a,b}
 			MengdeADT<Integer> set1 = makeSet(1,2,3);
-			MengdeADT<Integer> set2 = makeSet(1,2,3);		
-			//assertArrayEquals(set1.intersection(set2).toArray(), makeArray(1,2,3));
+			MengdeADT<Integer> set2 = makeSet(1,2,3);					
 			assertSetEquals(makeSet(1,2,3), set1.intersection(set2));
 		}
 		
 		{
 			// {a,b,c} intersect {b,c,d} = {b,c}
 			MengdeADT<Integer> set1 = makeSet(1,2,3);
-			MengdeADT<Integer> set2 = makeSet(2,3,4);		
-			//assertArrayEquals(set1.intersection(set2).toArray(), makeArray(2,3));
+			MengdeADT<Integer> set2 = makeSet(2,3,4);					
 			assertSetEquals(makeSet(2,3), set1.intersection(set2));
 		}		
 		
@@ -265,7 +256,6 @@ class TestLenketMengde {
 			// {} intersect {a,b} = {}
 			MengdeADT<Integer> set1 = makeSet();
 			MengdeADT<Integer> set2 = makeSet(1,2,3);		
-			//assertArrayEquals(set1.intersection(set2).toArray(), makeArray());
 			assertSetEquals(makeSet(), set1.intersection(set2));
 		}		
 	}
@@ -276,7 +266,6 @@ class TestLenketMengde {
             // {} difference {} = {}
             MengdeADT<Integer> set1 = makeSet();
             MengdeADT<Integer> set2 = makeSet();		
-            //assertArrayEquals(set1.difference(set2).toArray(), makeEmptyArray());
             assertSetEquals(makeSet(), set1.difference(set2));
         }
          
@@ -284,18 +273,14 @@ class TestLenketMengde {
             // {a,b} difference {c,d} = {a,b}
             MengdeADT<Integer> set1 = makeSet(1,2,3);
             MengdeADT<Integer> set2 = makeSet(4,5,6);
-            System.out.println(set1);
-            System.out.println(set2);
-            System.out.println(Arrays.toString(set1.difference(set2).toArray()));
-            //assertArrayEquals(set1.difference(set2).toArray(), makeArray(1,2,3));
-            assertSetEquals(makeSet(1,2,3), set1.difference(set2));
+              assertSetEquals(makeSet(1,2,3), set1.difference(set2));
         }
         
         {
             // {a,b} difference {a,b} = {}
             MengdeADT<Integer> set1 = makeSet(1,2,3);
             MengdeADT<Integer> set2 = makeSet(1,2,3);		
-            //assertArrayEquals(set1.difference(set2).toArray(), makeEmptyArray());
+            
             assertSetEquals(makeSet(), set1.difference(set2));
         }
         
@@ -303,15 +288,13 @@ class TestLenketMengde {
             // {a,b,c} difference {b,c,d} = {a}
             MengdeADT<Integer> set1 = makeSet(1,2,3);
             MengdeADT<Integer> set2 = makeSet(2,3,4);		
-            //assertArrayEquals(set1.difference(set2).toArray(), makeArray(1));
             assertSetEquals(makeSet(1), set1.difference(set2));
         }		
         
         {
             // {} difference {a,b} = {}
             MengdeADT<Integer> set1 = makeSet();
-            MengdeADT<Integer> set2 = makeSet(1,2,3);		
-            //assertArrayEquals(set1.difference(set2).toArray(), makeEmptyArray());
+            MengdeADT<Integer> set2 = makeSet(1,2,3);		            
             assertSetEquals(makeSet(), set1.difference(set2));
         }
 	}
@@ -439,9 +422,7 @@ class TestLenketMengde {
 		set1.isEqual(set2);
 		set1.isDisjoint(set2);
 		set1.isSubsetOf(set2);
-		set1.isEmpty();
-		//assertArrayEquals(set1.toArray(), new Integer[] {1,2,3});
-		//assertArrayEquals(set2.toArray(), new Integer[] {3,4,5});
+		set1.isEmpty();		
 		assertSetEquals(makeSet(1,2,3), set1);
 		assertSetEquals(makeSet(3,4,5), set2);
 		
@@ -525,13 +506,11 @@ class TestLenketMengde {
 		{
 			MengdeADT<Integer> set = makeSet(1, 2);
 			set.addAllFrom(makeSet(3, 4));
-			assertEquals(set.count(), 4);
-			//assertArrayEquals(set.toArray(), makeArray(1, 2, 3, 4));
+			assertEquals(set.count(), 4);			
 			assertSetEquals(makeSet(1,2,3,4), set);
 			
 			set.addAllFrom(makeSet(3, 4, 5, 6));
-			assertEquals(set.count(), 6);
-			//assertArrayEquals(set.toArray(), makeArray(1, 2, 3, 4, 5, 6));
+			assertEquals(set.count(), 6);			
 			assertSetEquals(makeSet(1,2,3,4,5,6), set);
 		}			
 	}
@@ -550,14 +529,12 @@ class TestLenketMengde {
 	@Test
 	void testMakeSet() {
 		{
-            MengdeADT<Integer> set = makeSet(1, 2, 3);
-            //assertArrayEquals(set.toArray(), makeArray(1, 2, 3));
+            MengdeADT<Integer> set = makeSet(1, 2, 3);            
             assertSetEquals(makeSet(1,2,3), set);
         }
         
         {
-            MengdeADT<Integer> set = makeSet();
-            //assertArrayEquals(set.toArray(), makeEmptyArray());
+            MengdeADT<Integer> set = makeSet();            
             assertSetEquals(makeSet(), set);
         }
 	}

@@ -1,6 +1,8 @@
 package Oppgave4;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -8,17 +10,18 @@ import java.util.HashSet;
 import adt.MengdeADT;
 
 import java.util.Set;
-
+ 
 public class TabellMengde<T> implements MengdeADT<T>{
-	
 	protected T[] mData;
 	protected int mSize;
 	
-	@SuppressWarnings("unchecked")
-	public TabellMengde() {
-		mData = (T[]) new Object[10];
-		mSize = 0;
-	}
+    @SuppressWarnings("unchecked")
+    public TabellMengde() {
+        this.mData = (T[]) new Object[10]; 
+        this.mSize = 0;
+    }
+
+
 	
 	/**
 	 * @return Om mengden er tom
@@ -240,9 +243,11 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	 * @return En tabell av elementene i mengden. Tabellen har størrelse lik
 	 *         antall elementer i mengden.
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public T[] toArray() {
-		return Arrays.copyOf(mData, mSize, (Class<T[]>) mData.getClass()); // Safe copy
+		//return Arrays.copyOf(mData, mSize, (Class<? extends T[]>) mData.getClass());
+		return Arrays.copyOf(mData, mSize);
 	}
 	
 	/**
