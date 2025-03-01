@@ -342,6 +342,27 @@ public class LenketMengde<T> implements MengdeADT<T>{
 	}
 	
 	/**
+	 * @return En tabell av elementene i mengden. Tabellen har størrelse lik
+	 *         antall elementer i mengden.
+	 */
+	@Override
+	public T[] toArray(T[] a) {
+		Node<T> current = mFirst;
+		
+		int writeIndex = mSize;
+		
+		T[] result = (T[]) new Object[mSize];
+		
+		while(current != null) {
+			result[--writeIndex] = current.data;
+			current = (Node<T>) current.next;
+		}
+		
+		//return result;
+		 return Arrays.copyOf(result, mSize, (Class<T[]>) a.getClass()); // Safe copy
+	}	
+	
+	/**
 	 * @return Antall elementer i mengden.
 	 */
 	@Override	
