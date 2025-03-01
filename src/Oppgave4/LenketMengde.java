@@ -1,15 +1,62 @@
 package Oppgave4;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+
 import adt.MengdeADT;
 
+class Node<T>{
+	T data;
+	Node<T> next;
+	
+	public Node() {
+		this.data = null;
+        this.next = null;
+	}
+	public Node(T data) {
+		this.data = data;
+		this.next = null;
+	}
+
+	public Node(T data, Node<T> next) {
+		this.data = data;
+		this.next = next;
+	}
+}
+
 public class LenketMengde<T> implements MengdeADT<T>{
+	//protected Node<T> mBeforeBegin;
+	//protected Node<T> mBeforeEnd;
+	
+	protected Node<T> mFirst;
+	protected int mSize;
+	
+	
+	public LenketMengde() {
+		//mBeforeBegin = new Node<T>();
+		//mBeforeEnd = new Node<T>();
+        mFirst = null;
+        mSize = 0;
+	}
+	
+	/*
+	protected Node<T> first(){
+		return mBeforeBegin.next;
+	}
+	protected Node<T> last(){
+		return mBeforeEnd;
+	}
+	*/
+	
 	
 	/**
 	 * @return Om mengden er tom
 	 */
 	@Override
 	public boolean isEmpty() {
-		
+		return mSize == 0;
 	}
 	
 	/**
@@ -18,7 +65,20 @@ public class LenketMengde<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public boolean contains(T element) {
+		Node<T> current = mFirst;
 		
+		while(current != null) {
+			if(current.data == null) {
+				if(element == null)
+					return true;
+			}else if(current.data.equals(element)) {
+				return true;
+			}
+
+			current = (Node<T>) current.next;
+		}
+		
+		return false;
 	}
 	
 	/**
@@ -27,7 +87,24 @@ public class LenketMengde<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public boolean isSubsetOf(MengdeADT<T> other) {
+		if (other == null) {
+			throw new NullPointerException();
+		}
 		
+		// try early exit
+		if(count() > other.count())
+			return false;
+		
+		// iterate over all elements
+		Node<T> current = mFirst;
+		while(current != null) {
+			if (!other.contains(current.data)) {
+				return false;
+			}
+			current = (Node<T>) current.next;
+		}
+		
+		return true;
 	}
 	
 	/**
@@ -36,7 +113,11 @@ public class LenketMengde<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public boolean isEqual(MengdeADT<T> other) {
+		if (other == null) {
+			throw new NullPointerException();
+		}
 		
+		return (count() == other.count()) && isSubsetOf(other);			
 	}
 	
 	/**
@@ -45,7 +126,24 @@ public class LenketMengde<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public boolean isDisjoint(MengdeADT<T> other) {
+		if (other == null) {
+			throw new NullPointerException();
+		}
+
+		// a simpler way to do this is to check if the intersection is 
+		// empty but it is not as fast, as it checks all elements
+		//return intersection(other).isEmpty();		
 		
+		// iterate over all elements
+		Node<T> current = mFirst;
+		while(current != null) {
+			if (other.contains(current.data)) {
+				return false;
+			}
+			current = (Node<T>) current.next;
+		}
+		
+		return true;
 	}
 	
 	/**
@@ -56,7 +154,33 @@ public class LenketMengde<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public MengdeADT<T> intersection(MengdeADT<T> other){
+		if (other == null) {
+			throw new NullPointerException();
+		}
 		
+		LenketMengde<T> result = new LenketMengde<T>();
+		
+		// by copying elements to array, we can avoid adding backwards
+		// to our list so we avoid ordering issues
+		T[] arr = this.toArray();
+		
+		for (int i = 0; i < arr.length; i++) {
+			if (other.contains(arr[i])) {
+				result.add(arr[i]);
+			}
+		}
+		
+		/*
+		Node<T> current = mFirst;		
+		while(current != null) {
+			if (other.contains(current.data)) {
+				result.add(current.data);
+			}
+			current = current.next;
+		}
+		*/
+		
+		return result;
 	}
 	
 	/**
@@ -67,7 +191,14 @@ public class LenketMengde<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public MengdeADT<T> union(MengdeADT<T> other){
+		if (other == null) {
+			throw new NullPointerException();
+		}
 		
+		LenketMengde<T> result = new LenketMengde<T>();
+		result.addAllFrom(this);
+		result.addAllFrom(other);		
+		return result;
 	}
 	
 	/**
@@ -77,8 +208,34 @@ public class LenketMengde<T> implements MengdeADT<T>{
 	 *         men lage en ny mengde som blir resultatet.
 	 */
 	@Override
-	public MengdeADT<T> subtract(MengdeADT<T> other){
+	public MengdeADT<T> difference(MengdeADT<T> other){
+		if(other == null) {
+			throw new NullPointerException();
+		}
+
+		LenketMengde<T> result = new LenketMengde<T>();
 		
+		// by copying elements to array, we can avoid adding backwards
+		// to our list so we avoid ordering issues
+		T[] arr = this.toArray();
+		
+		for(int i=0; i<arr.length; i++) {
+			if (!other.contains(arr[i])) {
+				result.add(arr[i]);
+			}
+		}
+		
+		/*
+		Node<T> current = mFirst;
+		while(current != null) {
+			if (!other.contains(current.data)) {
+				result.add(current.data);
+			}
+			current = current.next;
+		}
+		*/
+		
+		return result;
 	}
 	
 	/**
@@ -89,7 +246,18 @@ public class LenketMengde<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public void add(T element) {
+		// adding to start is really ugly, and messes up the order
+		// but we do it anyway to avoid having to iterate over all elements
+		// There are ways of fixing this like using beforeBegin and beforeEnd pointers
+		// but we are KISS'ing it here.
 		
+		if (contains(element)) {
+			return;
+		}
+		
+		Node<T> newNode = new Node<T>(element, mFirst);
+		mFirst = newNode;
+		mSize++;
 	}
 	
 	/**
@@ -100,7 +268,9 @@ public class LenketMengde<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public void addAllFrom(MengdeADT<T> other) {
-		
+		for (T element : other.toArray()) {
+			add(element);
+		}
 	}
 	
 	/**
@@ -112,7 +282,42 @@ public class LenketMengde<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public T remove(T element) {
+		Node<T> current = mFirst;
+		Node<T> prev = null;
 		
+		while(current != null) {
+			if(current.data != null) {
+				if(current.data.equals(element)) {
+					if (prev == null) {
+						// first element
+						mFirst = (Node<T>) current.next;
+					} else {
+						// not first element
+						prev.next = current.next;
+					}
+					mSize--;
+					return current.data;
+				}
+				
+			}else {
+				if(element == null) {
+					if(prev == null) {
+						// first element						
+                        mFirst = (Node<T>) current.next;
+					} else {
+						// not first element						
+						prev.next = current.next;
+					}
+					mSize--;
+					return null;
+				}
+			}
+			
+			prev = current;
+			current = (Node<T>) current.next;
+		}
+		
+		return null;		
 	}
 	
 	/**
@@ -121,7 +326,18 @@ public class LenketMengde<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public T[] toArray() {
+		Node<T> current = mFirst;
 		
+		int writeIndex = mSize;
+		
+		T[] result = (T[]) new Object[mSize];
+		
+		while(current != null) {
+			result[--writeIndex] = current.data;
+			current = (Node<T>) current.next;
+		}
+		
+		return result;
 	}
 	
 	/**
@@ -129,6 +345,35 @@ public class LenketMengde<T> implements MengdeADT<T>{
 	 */
 	@Override	
 	public int count() {
-		
+		return mSize;
 	}
+	
+	
+	
+	/**
+	 * 
+	 */
+	public static <T> MengdeADT<T> createFromArray(T[] arr) {
+		if(arr == null) {
+			throw new NullPointerException();
+		}
+		
+		MengdeADT<T> set = new LenketMengde<>();
+		for (var e : arr)
+			set.add(e);
+		return set;
+	}
+	
+	public Set<T> toJavaSet() {
+		return new HashSet<T>(Arrays.asList(toArray()));
+	}
+	
+	
+	/**
+	 * @return En streng representasjon av mengden.
+	 */
+	
+	public String toString() {
+		return Arrays.toString(toArray());
+	}	
 }

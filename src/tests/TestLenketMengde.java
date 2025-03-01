@@ -5,9 +5,12 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import Oppgave4.LenketMengde;
 import Oppgave4.TabellMengde;
 import adt.MengdeADT;
 
@@ -39,12 +42,12 @@ import adt.MengdeADT;
  * lik, feks {a,b} disjoint {b,c} kan testes med makeSet(1,2,3).disjoint(makeSet(2,3,4)).  
  */
 
-class SetTest {	
+class TestLenketMengde {	
 	/*
 	 */	
 	
 	protected <T> MengdeADT<Integer> makeSet(T[] arr) {
-		MengdeADT<Integer> set = new TabellMengde<Integer>();
+		MengdeADT<Integer> set = new LenketMengde<Integer>();
 		if(arr != null) {
 			for (T e : arr) {
 				set.add((Integer) e);
@@ -72,7 +75,7 @@ class SetTest {
 
 	protected <T> MengdeADT<Integer> makeEmptySet(){
 		// older method superseeded by makesET, used early on
-		return new TabellMengde<Integer>();
+		return new LenketMengde<Integer>();
 	}
 	
 	protected Integer[] makeEmptyArray() {
@@ -88,7 +91,7 @@ class SetTest {
 	
 	@Test
 	void testIsEmpty() {
-		MengdeADT<Integer> set = new TabellMengde<Integer>();
+		MengdeADT<Integer> set = makeSet();
 		
 		for(int i=0; i<2; i++) {
 			assertTrue(set.isEmpty(), "isEmpty() failed");
@@ -245,7 +248,10 @@ class SetTest {
         {
             // {a,b} difference {c,d} = {a,b}
             MengdeADT<Integer> set1 = makeSet(1,2,3);
-            MengdeADT<Integer> set2 = makeSet(4,5,6);		
+            MengdeADT<Integer> set2 = makeSet(4,5,6);
+            System.out.println(set1);
+            System.out.println(set2);
+            System.out.println(Arrays.toString(set1.difference(set2).toArray()));
             assertArrayEquals(set1.difference(set2).toArray(), makeArray(1,2,3));
         }
         
