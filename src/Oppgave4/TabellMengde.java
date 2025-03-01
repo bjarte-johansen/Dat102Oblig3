@@ -8,12 +8,12 @@ import adt.MengdeADT;
 
 import java.util.Set;
 
-public class ArraySet<T> implements MengdeADT<T>{
+public class TabellMengde<T> implements MengdeADT<T>{
 	
 	protected T[] mData;
 	protected int mSize;
 	
-	public ArraySet() {
+	public TabellMengde() {
 		mData = (T[]) new Object[10];
 		mSize = 0;
 	}
@@ -110,7 +110,7 @@ public class ArraySet<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public MengdeADT<T> intersection(MengdeADT<T> other){
-		MengdeADT<T> result = new ArraySet<T>();
+		MengdeADT<T> result = new TabellMengde<T>();
 		
 		if (other != null) {
 			for (int i=0; i<mSize; i++) {
@@ -132,7 +132,7 @@ public class ArraySet<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public MengdeADT<T> union(MengdeADT<T> other){
-		MengdeADT<T> result = new ArraySet<T>();
+		MengdeADT<T> result = new TabellMengde<T>();
 		
 		result.addAllFrom(this);
 		result.addAllFrom(other);
@@ -148,7 +148,7 @@ public class ArraySet<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public MengdeADT<T> difference(MengdeADT<T> other){
-		MengdeADT<T> result = new ArraySet<T>();
+		MengdeADT<T> result = new TabellMengde<T>();
 		
 		if(other == null) {
 			result.addAllFrom(this);
@@ -244,7 +244,7 @@ public class ArraySet<T> implements MengdeADT<T>{
 	 * 
 	 */
 	public static <T> MengdeADT<T> createFromArray(T[] arr) {
-		MengdeADT<T> set = new ArraySet<>();
+		MengdeADT<T> set = new TabellMengde<>();
 		if(arr != null) {
 			for (var e : arr)
 				set.add(e);

@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import Oppgave4.ArraySet;
+import Oppgave4.TabellMengde;
 import adt.MengdeADT;
 
 /**
@@ -21,9 +21,14 @@ import adt.MengdeADT;
  * pga stor arbeidsmengde vær å ettergå dette og gjøre det konsistent. 
  * 
  * Vi fant ut etterhvert at med detaljene i testene våre så dropper vi å gjøre flere
- * tester da vi allerede hadde rundet 500 linjer med kode i enhetstest 
+ * tester da vi allerede hadde rundet 500 linjer med kode i enhetstest. Metoder som 
+ * ikke er dekket med egen funksjon er dekket under andre tester mener vi. 
  */
 class SetTest {
+	// navngiving vi skulle ønsket vi kunne brukt
+	// class ArraySet<T> extends TabellMengde<T>{};
+	// class ForwardLinkedSet<T> extends LenketMengde<T>{};
+	
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -37,7 +42,7 @@ class SetTest {
 	 */	
 	
 	protected <T> MengdeADT<Integer> makeSet(T[] arr) {
-		MengdeADT<Integer> set = new ArraySet<Integer>();
+		MengdeADT<Integer> set = new TabellMengde<Integer>();
 		if(arr != null) {
 			for (T e : arr) {
 				set.add((Integer) e);
@@ -64,7 +69,7 @@ class SetTest {
 	
 	protected <T> MengdeADT<Integer> makeEmptySet(){
 		// older method superseeded by makesET, used early on
-		return new ArraySet<Integer>();
+		return new TabellMengde<Integer>();
 	}
 	
 	protected Integer[] makeEmptyArray() {
@@ -80,7 +85,7 @@ class SetTest {
 	
 	@Test
 	void testIsEmpty() {
-		MengdeADT<Integer> set = new ArraySet<Integer>();
+		MengdeADT<Integer> set = new TabellMengde<Integer>();
 		
 		for(int i=0; i<2; i++) {
 			assertTrue(set.isEmpty(), "isEmpty() failed");

@@ -2,7 +2,7 @@ package Oppgave4;
 
 import adt.MengdeADT;
 
-public class LinkedSet<T> implements MengdeADT<T>{
+public class LenketMengde<T> implements MengdeADT<T>{
 	
 	/**
 	 * @return Om mengden er tom
