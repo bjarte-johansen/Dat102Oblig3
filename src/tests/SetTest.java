@@ -23,6 +23,12 @@ import adt.MengdeADT;
  * Vi fant ut etterhvert at med detaljene i testene våre så dropper vi å gjøre flere
  * tester da vi allerede hadde rundet 500 linjer med kode i enhetstest. Metoder som 
  * ikke er dekket med egen funksjon er dekket under andre tester mener vi. 
+ * 
+ * - testThrowNullPointerException() sjekker at metoder som tar et sett som argument
+ * kaster NullPointerException hvis argumentet er null.
+ * 
+ * - scoped variables er brukt i { statement-list } blokker for å tillate redeklarasjon
+ * av variabler i samme metode / funksjon 
  */
 class SetTest {	
 	/*
@@ -484,4 +490,28 @@ class SetTest {
         assertThrows(NullPointerException.class, () -> set.union(null));
         assertThrows(NullPointerException.class, () -> set.difference(null));
 	}
+	
+	@Test
+	void testMakeSet() {
+		{
+            MengdeADT<Integer> set = makeSet(1, 2, 3);
+            assertArrayEquals(set.toArray(), makeArray(1, 2, 3));
+        }
+        
+        {
+            MengdeADT<Integer> set = makeSet();
+            assertArrayEquals(set.toArray(), makeEmptyArray());
+        }
+	}
+	void testMakeArray() {
+		{
+            Integer[] arr = makeArray(1, 2, 3);
+            assertArrayEquals(arr, new Integer[] {1, 2, 3});
+        }
+        
+        {
+            Integer[] arr = makeArray();
+            assertArrayEquals(arr, new Integer[] {});
+        }
+    }
 }
