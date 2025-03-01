@@ -86,19 +86,23 @@ class SetTest {
 	
 	@Test 
 	public void testDisjoint(){
+		/*
 		{
 			// {...} disjoint null = true
 			MengdeADT<Integer> set1 = makeSet(1,2,3);
 			MengdeADT<Integer> set2 = null;		
 			assertTrue(set1.isDisjoint(set2), "isDisjoint() failed");
-		}		
+		}
+		*/		
 
+		/*
 		{
 			// {} disjoint null = true
 			MengdeADT<Integer> set1 = makeEmptySet();
 			MengdeADT<Integer> set2 = null;		
 			assertTrue(set1.isDisjoint(set2), "isDisjoint() failed");
-		}		
+		}
+		*/		
 		
 		{
 			// {} disjoint {} = true
@@ -143,13 +147,6 @@ class SetTest {
 			MengdeADT<Integer> set1 = makeEmptySet();
 			MengdeADT<Integer> set2 = makeEmptySet();		
 			assertArrayEquals(set1.union(set2).toArray(), makeEmptyArray());
-		}	
-		
-		{
-			// {a,b} union null = {a,b}
-			MengdeADT<Integer> set1 = makeSet(new Integer[] {1,2,3});
-			MengdeADT<Integer> set2 = null;
-			assertArrayEquals(set1.union(set2).toArray(), new Integer[] {1,2,3});
 		}	
 		
 		{
@@ -200,19 +197,6 @@ class SetTest {
 			assertArrayEquals(set1.intersection(set2).toArray(), makeEmptyArray());
 		}
 		
-		{
-			// {} intersect null = {}
-			MengdeADT<Integer> set1 = makeSet();
-			MengdeADT<Integer> set2 = null;		
-			assertArrayEquals(set1.intersection(set2).toArray(), makeEmptyArray());
-		}		
-		
-		{
-			// {a,b} intersect null = {}
-			MengdeADT<Integer> set1 = makeSet(1,2,3);
-			MengdeADT<Integer> set2 = null;		
-			assertArrayEquals(set1.intersection(set2).toArray(), makeEmptyArray());
-		}		
 		
 		{
 			// {a,b} intersect {a,b} = {a,b}
@@ -253,20 +237,6 @@ class SetTest {
         }
         
         {
-            // {} difference null = {}
-            MengdeADT<Integer> set1 = makeSet();
-            MengdeADT<Integer> set2 = null;		
-            assertArrayEquals(set1.difference(set2).toArray(), makeEmptyArray());
-        }		
-        
-        {
-            // {a,b} difference null = {a,b}
-            MengdeADT<Integer> set1 = makeSet(1,2,3);
-            MengdeADT<Integer> set2 = null;		
-            assertArrayEquals(set1.difference(set2).toArray(), makeArray(1,2,3));
-        }		
-        
-        {
             // {a,b} difference {a,b} = {}
             MengdeADT<Integer> set1 = makeSet(1,2,3);
             MengdeADT<Integer> set2 = makeSet(1,2,3);		
@@ -305,12 +275,6 @@ class SetTest {
 		
 		{
 			MengdeADT<Integer> set1 = makeSet(1,2,3);
-			MengdeADT<Integer> set2 = null;
-			assertFalse(set1.isEqual(set2));
-		}
-		
-		{
-			MengdeADT<Integer> set1 = makeSet(1,2,3);
 			MengdeADT<Integer> set2 = makeSet();
 			assertFalse(set1.isEqual(set2));
 		}
@@ -326,12 +290,6 @@ class SetTest {
 			MengdeADT<Integer> set2 = makeSet(1,2,3);
 			assertFalse(set1.isEqual(set2));
 		}			
-		
-		{
-			MengdeADT<Integer> set1 = makeSet();
-			MengdeADT<Integer> set2 = null;
-			assertTrue(set1.isEqual(set2));
-		}
 	}
 	
 	@Test
@@ -356,12 +314,6 @@ class SetTest {
 		
 		{
 			MengdeADT<Integer> set1 = makeSet(1,2,3);
-			MengdeADT<Integer> set2 = null;
-			assertFalse(set1.isSubsetOf(set2));
-		}
-		
-		{
-			MengdeADT<Integer> set1 = makeSet(1,2,3);
 			MengdeADT<Integer> set2 = makeSet();
 			assertFalse(set1.isSubsetOf(set2));
 		}
@@ -377,12 +329,6 @@ class SetTest {
 			MengdeADT<Integer> set2 = makeSet(1,2,3);
 			assertTrue(set1.isSubsetOf(set2));
 		}			
-		
-		{
-			MengdeADT<Integer> set1 = makeSet();
-			MengdeADT<Integer> set2 = null;
-			assertTrue(set1.isSubsetOf(set2));
-		}
 	}
 	
 	

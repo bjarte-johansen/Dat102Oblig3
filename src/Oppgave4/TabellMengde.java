@@ -51,14 +51,14 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public boolean isSubsetOf(MengdeADT<T> other) {
+		if (other == null) {
+			throw new NullPointerException();			
+		}
+		
 		if(isEmpty()) {
 			return true;
 		}
-		
-		if (other == null) {
-			return false;			
-		}
-		
+				
         for (int i=0; i<mSize; i++) {
         	T e = mData[i];
 			if (!other.contains(e)) {
@@ -75,8 +75,8 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public boolean isEqual(MengdeADT<T> other) {
-		if(other == null) {
-			return isEmpty();
+		if (other == null) {
+			throw new NullPointerException();			
 		}
 		
 		return (count() == other.count()) && isSubsetOf(other);
@@ -89,8 +89,8 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	@Override
 	public boolean isDisjoint(MengdeADT<T> other) {
 		if (other == null) {
-			return true;
-		}
+			throw new NullPointerException();			
+		}		
 		
         for (int i=0; i<mSize; i++) {
         	T e = mData[i];
@@ -110,14 +110,16 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public MengdeADT<T> intersection(MengdeADT<T> other){
+		if (other == null) {
+			throw new NullPointerException();			
+		}
+		
 		MengdeADT<T> result = new TabellMengde<T>();
 		
-		if (other != null) {
-			for (int i=0; i<mSize; i++) {
-				T e = mData[i];
-				if (other.contains(e)) {
-					result.add(e);
-				}
+		for (int i=0; i<mSize; i++) {
+			T e = mData[i];
+			if (other.contains(e)) {
+				result.add(e);
 			}
 		}
 		
@@ -132,6 +134,10 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public MengdeADT<T> union(MengdeADT<T> other){
+		if (other == null) {
+			throw new NullPointerException();
+		}
+		
 		MengdeADT<T> result = new TabellMengde<T>();
 		
 		result.addAllFrom(this);
@@ -148,12 +154,11 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public MengdeADT<T> difference(MengdeADT<T> other){
-		MengdeADT<T> result = new TabellMengde<T>();
-		
-		if(other == null) {
-			result.addAllFrom(this);
-			return result;
+		if (other == null) {
+			throw new NullPointerException();
 		}
+		
+		MengdeADT<T> result = new TabellMengde<T>();
 		
         for (int i=0; i<mSize; i++) {
         	T e = mData[i];
@@ -192,8 +197,9 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public void addAllFrom(MengdeADT<T> other) {
-		if(other == null)
-			return;
+		if (other == null) {
+			throw new NullPointerException();
+		}
 		
 		T[] otherArr = other.toArray();
 		for (T e : otherArr) {
@@ -244,11 +250,13 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	 * 
 	 */
 	public static <T> MengdeADT<T> createFromArray(T[] arr) {
-		MengdeADT<T> set = new TabellMengde<>();
-		if(arr != null) {
-			for (var e : arr)
-				set.add(e);
+		if(arr == null) {
+			throw new NullPointerException();
 		}
+		
+		MengdeADT<T> set = new TabellMengde<>();
+		for (var e : arr)
+			set.add(e);
 		return set;
 	}
 	
