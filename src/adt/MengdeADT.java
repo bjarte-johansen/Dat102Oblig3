@@ -87,6 +87,12 @@ public interface MengdeADT<T> {
 	T[] toArray();
 	
 	/**
+	 * @return En tabell av elementene i mengden. Tabellen har størrelse lik
+	 *         antall elementer i mengden.
+	 */
+	T[] toArray(T[] a);	
+	
+	/**
 	 * @return Antall elementer i mengden.
 	 */
 	int count();

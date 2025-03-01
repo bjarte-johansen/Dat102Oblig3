@@ -337,7 +337,8 @@ public class LenketMengde<T> implements MengdeADT<T>{
 			current = (Node<T>) current.next;
 		}
 		
-		return result;
+		//return result;
+		 return Arrays.copyOf(result, mSize, (Class<T[]>) result.getClass()); // Safe copy
 	}
 	
 	/**

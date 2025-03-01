@@ -5,6 +5,8 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -80,6 +82,34 @@ class TestTabellMengde {
 		return new Integer[] {};
 	}
 
+	
+	/*
+	 * 
+	 */
+
+	protected Integer[] sortedCopyArray(Integer[] arr) {
+		Integer[] arrCopy = arr.clone();
+		Arrays.sort(arrCopy);
+		return arrCopy;
+	}
+
+	
+	/*
+	 * 
+	 */
+	 
+	protected void assertSetEquals(Integer[] expected, MengdeADT<Integer> result) {
+		Integer[] resultArr = sortedCopyArray(expected);
+		Integer[] expectedArr = sortedCopyArray(expected);
+		assertArrayEquals(expectedArr, resultArr);
+	}
+	
+	protected void assertSetEquals(MengdeADT<Integer> expected, MengdeADT<Integer> result) {
+		// we could optimize this code, but meh
+		Integer[] resultArr = sortedCopyArray(result.toArray(new Integer[0]));
+		Integer[] expectedArr = sortedCopyArray(result.toArray(new Integer[0]));	
+		assertArrayEquals(expectedArr, resultArr);
+	}	
 
 
 	/**
@@ -99,58 +129,40 @@ class TestTabellMengde {
 	}	
 	
 	@Test 
-	public void testDisjoint(){
-		/*
-		{
-			// {...} disjoint null = true
-			MengdeADT<Integer> set1 = makeSet(1,2,3);
-			MengdeADT<Integer> set2 = null;		
-			assertTrue(set1.isDisjoint(set2), "isDisjoint() failed");
-		}
-		*/		
-
-		/*
-		{
-			// {} disjoint null = true
-			MengdeADT<Integer> set1 = makeEmptySet();
-			MengdeADT<Integer> set2 = null;		
-			assertTrue(set1.isDisjoint(set2), "isDisjoint() failed");
-		}
-		*/		
-		
+	public void testDisjoint(){		
 		{
 			// {} disjoint {} = true
 			MengdeADT<Integer> set1 = makeEmptySet();
 			MengdeADT<Integer> set2 = makeEmptySet();		
-			assertTrue(set1.isDisjoint(set2), "isDisjoint() failed");
+			assertTrue(set1.isDisjoint(set2));
 		}			
 		
 		{
 			// {...} disjoint {} = true
 			MengdeADT<Integer> set1 = makeSet(1,2,3);
 			MengdeADT<Integer> set2 = makeEmptySet();
-			assertTrue(set1.isDisjoint(set2), "isDisjoint() failed");
+			assertTrue(set1.isDisjoint(set2));
 		}
 		
 		{
 			// {} disjoint {...} = true
 			MengdeADT<Integer> set1 = makeEmptySet();
 			MengdeADT<Integer> set2 = makeSet(new Integer[] {1,2,3});
-			assertTrue(set1.isDisjoint(set2), "isDisjoint() failed");
+			assertTrue(set1.isDisjoint(set2));
 		}				
 		
 		{
 			// {a} disjoint {b} = true
 			MengdeADT<Integer> set1 = makeSet(new Integer[] {1,2,3});
 			MengdeADT<Integer> set2 = makeSet(new Integer[] {4,5,6});		
-			assertTrue(set1.isDisjoint(set2), "isDisjoint() failed");
+			assertTrue(set1.isDisjoint(set2));
 		}
 				
 		{
 			// {a,b,c} disjoint {c,d,e} = false
 			MengdeADT<Integer> set1 = makeSet(new Integer[] {1,2,3});
 			MengdeADT<Integer> set2 = makeSet(new Integer[] {3,5,6});		
-			assertFalse(set1.isDisjoint(set2), "isDisjoint() failed");
+			assertFalse(set1.isDisjoint(set2));
 		}	
 	}
 	
@@ -166,8 +178,9 @@ class TestTabellMengde {
 		{
 			// {} union {a,b} = {a,b}
 			MengdeADT<Integer> set1 = makeEmptySet();
-			MengdeADT<Integer> set2 = makeSet(new Integer[] {1,2,3});		
-			assertArrayEquals(set1.union(set2).toArray(), new Integer[] {1,2,3});
+			MengdeADT<Integer> set2 = makeSet(new Integer[] {1,2,3});
+			assertSetEquals(makeSet(1,2,3), set1.union(set2));
+			//assertArrayEquals(set1.union(set2).toArray(), new Integer[] {1,2,3});
 		}	
 				
 		
@@ -497,7 +510,7 @@ class TestTabellMengde {
         assertThrows(NullPointerException.class, () -> set.union(null));
         assertThrows(NullPointerException.class, () -> set.difference(null));
 	}
-	
+	 
 	@Test
 	void testMakeSet() {
 		{

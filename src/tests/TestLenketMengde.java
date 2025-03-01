@@ -40,6 +40,12 @@ import adt.MengdeADT;
  * Note: Tester er merket med {}, {a, b}, {b, c} selv om testen kan inneholde flere variabler
  * i selve testen. Det er for å vise mønster til typen test; det er ikke meningen kode må være eksakt
  * lik, feks {a,b} disjoint {b,c} kan testes med makeSet(1,2,3).disjoint(makeSet(2,3,4)).  
+ * 
+ * For lenketmengde så adder vi til starten av linked-list og må derfor snu array i toArray() metoden
+ * ved å skrive baklengs. Dette er også grunnen til at vi i metoder som lager et nytt sett må ta
+ * toArray() først og bruke dette til å iterere over elementer med for å få riktig order i nye settet. 
+ * Selv om det kan sies at sett er unordered blir det i vår testenhet sammenlignet arrays og vi har
+ * derfor valgt å gjøre det på denne måten.
  */
 
 class TestLenketMengde {	
@@ -72,7 +78,6 @@ class TestLenketMengde {
 	protected Integer[] makeArray(Integer a, Integer b, Integer c, Integer d, Integer e) { return new Integer[] {a,b,c,d,e}; }
 	protected Integer[] makeArray(Integer a, Integer b, Integer c, Integer d, Integer e, Integer f) { return new Integer[] {a,b,c,d,e,f}; }
 	
-
 	protected <T> MengdeADT<Integer> makeEmptySet(){
 		// older method superseeded by makesET, used early on
 		return new LenketMengde<Integer>();
@@ -80,10 +85,37 @@ class TestLenketMengde {
 	
 	protected Integer[] makeEmptyArray() {
 		// older method superseeded by makeArray, used early on
-		return new Integer[] {};
+		return makeArray();
 	}
 
 
+	/*
+	 * 
+	 */
+
+	protected Integer[] sortedCopyArray(Integer[] arr) {
+		Integer[] arrCopy = arr.clone();
+		Arrays.sort(arrCopy);
+		return arrCopy;
+	}
+
+	
+	/*
+	 * 
+	 */
+	 
+	protected void assertSetEquals(Integer[] expected, MengdeADT<Integer> result) {
+		Integer[] resultArr = sortedCopyArray(expected);
+		Integer[] expectedArr = sortedCopyArray(expected);
+		assertArrayEquals(expectedArr, resultArr);
+	}
+	
+	protected void assertSetEquals(MengdeADT<Integer> expected, MengdeADT<Integer> result) {
+		// we could optimize this code, but meh
+		Integer[] resultArr = sortedCopyArray(result.toArray(new Integer[0]));
+		Integer[] expectedArr = sortedCopyArray(result.toArray(new Integer[0]));	
+		assertArrayEquals(expectedArr, resultArr);
+	}		
 
 	/**
 	 * 
@@ -103,57 +135,39 @@ class TestLenketMengde {
 	
 	@Test 
 	public void testDisjoint(){
-		/*
-		{
-			// {...} disjoint null = true
-			MengdeADT<Integer> set1 = makeSet(1,2,3);
-			MengdeADT<Integer> set2 = null;		
-			assertTrue(set1.isDisjoint(set2), "isDisjoint() failed");
-		}
-		*/		
-
-		/*
-		{
-			// {} disjoint null = true
-			MengdeADT<Integer> set1 = makeEmptySet();
-			MengdeADT<Integer> set2 = null;		
-			assertTrue(set1.isDisjoint(set2), "isDisjoint() failed");
-		}
-		*/		
-		
 		{
 			// {} disjoint {} = true
 			MengdeADT<Integer> set1 = makeEmptySet();
 			MengdeADT<Integer> set2 = makeEmptySet();		
-			assertTrue(set1.isDisjoint(set2), "isDisjoint() failed");
+			assertTrue(set1.isDisjoint(set2));
 		}			
 		
 		{
 			// {...} disjoint {} = true
 			MengdeADT<Integer> set1 = makeSet(1,2,3);
 			MengdeADT<Integer> set2 = makeEmptySet();
-			assertTrue(set1.isDisjoint(set2), "isDisjoint() failed");
+			assertTrue(set1.isDisjoint(set2));
 		}
 		
 		{
 			// {} disjoint {...} = true
 			MengdeADT<Integer> set1 = makeEmptySet();
 			MengdeADT<Integer> set2 = makeSet(new Integer[] {1,2,3});
-			assertTrue(set1.isDisjoint(set2), "isDisjoint() failed");
+			assertTrue(set1.isDisjoint(set2));
 		}				
 		
 		{
 			// {a} disjoint {b} = true
 			MengdeADT<Integer> set1 = makeSet(new Integer[] {1,2,3});
 			MengdeADT<Integer> set2 = makeSet(new Integer[] {4,5,6});		
-			assertTrue(set1.isDisjoint(set2), "isDisjoint() failed");
+			assertTrue(set1.isDisjoint(set2));
 		}
 				
 		{
 			// {a,b,c} disjoint {c,d,e} = false
 			MengdeADT<Integer> set1 = makeSet(new Integer[] {1,2,3});
 			MengdeADT<Integer> set2 = makeSet(new Integer[] {3,5,6});		
-			assertFalse(set1.isDisjoint(set2), "isDisjoint() failed");
+			assertFalse(set1.isDisjoint(set2));
 		}	
 	}
 	
@@ -162,7 +176,7 @@ class TestLenketMengde {
 		{
 			// {} union {} = {}
 			MengdeADT<Integer> set1 = makeEmptySet();
-			MengdeADT<Integer> set2 = makeEmptySet();		
+			MengdeADT<Integer> set2 = makeEmptySet();
 			assertArrayEquals(set1.union(set2).toArray(), makeEmptyArray());
 		}	
 		
@@ -244,7 +258,7 @@ class TestLenketMengde {
             MengdeADT<Integer> set2 = makeSet();		
             assertArrayEquals(set1.difference(set2).toArray(), makeEmptyArray());
         }
-        
+         
         {
             // {a,b} difference {c,d} = {a,b}
             MengdeADT<Integer> set1 = makeSet(1,2,3);
