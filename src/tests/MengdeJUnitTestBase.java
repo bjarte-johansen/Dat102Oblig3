@@ -37,6 +37,7 @@ import org.junit.jupiter.api.Test;
 
 import adt.MengdeADT;
 
+
 abstract public class MengdeJUnitTestBase {
 	abstract <T> MengdeADT<T> makeSet(T[] a);
 	

@@ -134,6 +134,15 @@ public class TomTabellMengde<T> implements MengdeADT<T>{
 	}
 	
 	/**
+	 * @return En tabell av elementene i mengden. Tabellen har størrelse lik
+	 *         antall elementer i mengden.
+	 */
+	@Override
+	public T[] toArray(T[] a) {
+
+	}
+	
+	/**
 	 * @return Antall elementer i mengden.
 	 */
 	@Override	

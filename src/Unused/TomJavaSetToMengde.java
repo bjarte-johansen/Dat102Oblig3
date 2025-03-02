@@ -2,26 +2,8 @@ package Unused;
 
 import adt.MengdeADT;
 
-class Node<T>{
-	T data;
-	Node<T> next;
-	
-	public Node() {
-		this.data = null;
-        this.next = null;
-	}
-	public Node(T data) {
-		this.data = data;
-		this.next = null;
-	}
 
-	public Node(T data, Node<T> next) {
-		this.data = data;
-		this.next = next;
-	}
-}
-
-public class TomLenketMengde<T> implements MengdeADT<T>{
+public class TomJavaSetToMengde<T> implements MengdeADT<T>{
 	
 	
 	/**
