@@ -1,7 +1,10 @@
 /**
  * 
  * Vi tester alle eller nær alle metoder, selv om det kan være noe overlap.
- *  
+ * 
+ * Vi gjenbruker alle testene ved å nedarve alle testrutiner utenom makeSet() method som
+ * lager korrekt instansetype og returnerer den som MengdeADT<T>.
+ * 
  * Vi fant ut etterhvert at med detaljene i testene våre så dropper vi å gjøre flere
  * tester da vi allerede hadde rundet 500 linjer med kode i enhetstest. Metoder som 
  * ikke er dekket med egen funksjon er dekket under andre tester mener vi. 
@@ -12,9 +15,8 @@
  * Note: scoped variables er brukt i { statement-list } blokker for å tillate redeklarasjon
  * av variabler i samme metode / funksjon 
  * 
- * Note: Noen av testene er i en loop som kjører to ganger, eller har duplikat av add/remove
- * etc; dette er ikke feil, det er for å teste LenkedMengde bedre for å avdekke problemer
- * med remove/head/add.
+ * Note: Noen av testene er i en loop som kjører to ganger, det er for å teste LenkedMengde 
+ * bedre for å avdekke problemer med head/tail-refs for remove//add metoder.
  * 
  * Note: Tester er merket med {}, {a, b}, {b, c} selv om testen kan inneholde flere variabler
  * i selve testen. Det er for å vise mønster til typen test; det er ikke meningen kode må være eksakt
@@ -54,10 +56,7 @@ abstract public class MengdeJUnitTestBase {
 	protected Integer[] makeArray(Integer a, Integer b, Integer c, Integer d, Integer e) { return new Integer[] {a,b,c,d,e}; }
 	protected Integer[] makeArray(Integer a, Integer b, Integer c, Integer d, Integer e, Integer f) { return new Integer[] {a,b,c,d,e,f}; }
 	
-	// methods to make empty sets/arrays
-	//protected <T> MengdeADT<Integer> makeEmptySet(){ return makeSet(); }	
-	//protected Integer[] makeEmptyArray() { return makeArray(); }
-	
+
 	/*
 	 * 
 	 */
@@ -245,9 +244,6 @@ abstract public class MengdeJUnitTestBase {
             // {a,b} difference {c,d} = {a,b}
             MengdeADT<Integer> set1 = makeSet(1,2,3);
             MengdeADT<Integer> set2 = makeSet(4,5,6);
-            System.out.println(set1);
-            System.out.println(set2);
-            System.out.println(Arrays.toString(set1.difference(set2).toArray()));
             assertSetEquals(makeSet(1,2,3), set1.difference(set2));
         }
         
