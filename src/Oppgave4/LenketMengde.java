@@ -92,7 +92,7 @@ public class LenketMengde<T> implements MengdeADT<T>{
 				return true;
 			}
 
-			current = (Node<T>) current.next;
+			current = current.next;
 		}
 		
 		return false;
@@ -118,7 +118,7 @@ public class LenketMengde<T> implements MengdeADT<T>{
 			if (!other.contains(current.data)) {
 				return false;
 			}
-			current = (Node<T>) current.next;
+			current = current.next;
 		}
 		
 		return true;
@@ -157,7 +157,7 @@ public class LenketMengde<T> implements MengdeADT<T>{
 			if (other.contains(current.data)) {
 				return false;
 			}
-			current = (Node<T>) current.next;
+			current = current.next;
 		}
 		
 		return true;
@@ -286,7 +286,7 @@ public class LenketMengde<T> implements MengdeADT<T>{
 				if(current.data.equals(element)) {
 					if (prev == null) {
 						// first element
-						mFirst = (Node<T>) current.next;
+						mFirst = current.next;
 					} else {
 						// not first element
 						prev.next = current.next;
@@ -299,7 +299,7 @@ public class LenketMengde<T> implements MengdeADT<T>{
 				if(element == null) {
 					if(prev == null) {
 						// first element						
-                        mFirst = (Node<T>) current.next;
+                        mFirst = current.next;
 					} else {
 						// not first element						
 						prev.next = current.next;
@@ -310,7 +310,7 @@ public class LenketMengde<T> implements MengdeADT<T>{
 			}
 			
 			prev = current;
-			current = (Node<T>) current.next;
+			current = current.next;
 		}
 		
 		return null;		
@@ -330,7 +330,7 @@ public class LenketMengde<T> implements MengdeADT<T>{
 		
 		while(current != null) {
 			result[--writeIndex] = current.data;
-			current = (Node<T>) current.next;
+			current = current.next;
 		}
 		
 		//return result;
@@ -351,7 +351,7 @@ public class LenketMengde<T> implements MengdeADT<T>{
 		
 		while(current != null) {
 			result[--writeIndex] = current.data;
-			current = (Node<T>) current.next;
+			current = current.next;
 		}
 		
 		//return result;
