@@ -41,6 +41,23 @@ public class LenketMengde<T> implements MengdeADT<T>{
         mSize = 0;
 	}
 	
+    /*
+     * @return Hashcode for mengden
+     */	
+	public int hashCode() {
+		int hashCode = 0;
+		
+		Node<T> current = mFirst;
+		while(current != null) {
+			if (current.data != null) {
+				hashCode += current.data.hashCode();
+			}
+			current = current.next;
+		}
+		
+		return hashCode;
+	}
+	
 	/*
 	protected Node<T> first(){
 		return mBeforeBegin.next;
@@ -132,7 +149,7 @@ public class LenketMengde<T> implements MengdeADT<T>{
 
 		// a simpler way to do this is to check if the intersection is 
 		// empty but it is not as fast, as it checks all elements
-		//return intersection(other).isEmpty();		
+		// return intersection(other).isEmpty();		
 		
 		// iterate over all elements
 		Node<T> current = mFirst;
@@ -160,18 +177,7 @@ public class LenketMengde<T> implements MengdeADT<T>{
 		
 		LenketMengde<T> result = new LenketMengde<T>();
 		
-		/*
-		// by copying elements to array, we can avoid adding backwards
-		// to our list so we avoid ordering issues
-		T[] arr = this.toArray();
-		
-		for (int i = 0; i < arr.length; i++) {
-			if (other.contains(arr[i])) {
-				result.add(arr[i]);
-			}
-		}*/
-		
-
+		// iterate over all elements
 		Node<T> current = mFirst;		
 		while(current != null) {
 			if (other.contains(current.data)) {
@@ -193,8 +199,9 @@ public class LenketMengde<T> implements MengdeADT<T>{
 	public MengdeADT<T> union(MengdeADT<T> other){
 		if (other == null) {
 			throw new NullPointerException();
-		}
+		} 
 		
+		// add all elements from both sets
 		LenketMengde<T> result = new LenketMengde<T>();
 		result.addAllFrom(this);
 		result.addAllFrom(other);		
@@ -215,18 +222,7 @@ public class LenketMengde<T> implements MengdeADT<T>{
 
 		LenketMengde<T> result = new LenketMengde<T>();
 		
-		/*
-		// by copying elements to array, we can avoid adding backwards
-		// to our list so we avoid ordering issues
-		T[] arr = this.toArray();
-		
-		for(int i=0; i<arr.length; i++) {
-			if (!other.contains(arr[i])) {
-				result.add(arr[i]);
-			}
-		}
-		*/
-		
+		// iterate over all elements
 		Node<T> current = mFirst;
 		while(current != null) {
 			if (!other.contains(current.data)) {

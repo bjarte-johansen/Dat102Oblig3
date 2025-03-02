@@ -21,7 +21,21 @@ public class TabellMengde<T> implements MengdeADT<T>{
         this.mSize = 0;
     }
 
-
+    
+    /*
+     * @return Hashcode for mengden
+     */
+	public int hashCode() {
+		int hashCode = 0;
+		
+		for (int i = 0; i < mSize; i++) {
+			if (mData[i] != null) {
+				hashCode += mData[i].hashCode();
+			}
+		}
+		
+		return hashCode;
+	}
 	
 	/**
 	 * @return Om mengden er tom

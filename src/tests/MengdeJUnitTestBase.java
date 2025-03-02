@@ -487,7 +487,7 @@ abstract public class MengdeJUnitTestBase {
 	
 	@Test
 	void testThrowNullPointerException() {
-		MengdeADT<Integer> set = makeSet(1, 2);
+		MengdeADT<Integer> set = makeSet();
         assertThrows(NullPointerException.class, () -> set.addAllFrom(null));
         assertThrows(NullPointerException.class, () -> set.isDisjoint(null));
         assertThrows(NullPointerException.class, () -> set.isEqual(null));
@@ -521,4 +521,12 @@ abstract public class MengdeJUnitTestBase {
             assertArrayEquals(new Integer[] {}, arr);
         }
     }	
+	
+	@Test
+	void testHashCode() {
+		// check that hashcCode is the sum of the integers
+		assertEquals(0, makeSet().hashCode());
+		assertEquals(6, makeSet(1,2,3).hashCode());
+		assertEquals(12, makeSet(3,4,5).hashCode());
+	}
 }

@@ -20,6 +20,13 @@ public class JavaSetToMengde<T> implements MengdeADT<T>{
     }
 
 
+    /*
+     * @return Hashcode for mengden
+     */    
+	public int hashCode() {
+		return mStorage.hashCode();
+	}
+    
 	
 	/**
 	 * @return Om mengden er tom
