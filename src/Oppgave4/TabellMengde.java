@@ -260,7 +260,6 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public T[] toArray() {
-		//return Arrays.copyOf(mData, mSize, (Class<? extends T[]>) mData.getClass());
 		return Arrays.copyOf(mData, mSize);
 	}
 	
