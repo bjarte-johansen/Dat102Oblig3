@@ -1,6 +1,3 @@
-/**
- * 
- */
 package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,9 +10,10 @@ import org.junit.jupiter.api.Test;
 import Oppgave4.*;
 import adt.MengdeADT;
 
+
 class TestJavaSetToMengde extends MengdeJUnitTestBase{	
 	/*
-	 * override makeset method for our class
+	 * override makeSet method for our class
 	 */	
 	
 	protected <T> MengdeADT<T> makeSet(T[] arr) {

@@ -235,6 +235,7 @@ public class JavaSetToMengde<T> implements MengdeADT<T>{
 	/**
 	 * 
 	 */
+	/*
 	public static <T> MengdeADT<T> createFromArray(T[] arr) {
 		if(arr == null) {
 			throw new NullPointerException();
@@ -249,6 +250,7 @@ public class JavaSetToMengde<T> implements MengdeADT<T>{
 	public Set<T> toJavaSet() {
 		return new HashSet<T>(Arrays.asList(toArray()));
 	}
+	*/
 	
 	
 	/**

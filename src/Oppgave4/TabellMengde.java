@@ -12,14 +12,22 @@ import adt.MengdeADT;
 import java.util.Set;
  
 public class TabellMengde<T> implements MengdeADT<T>{
+	static final int DEFAULT_INITIAL_CAPACITY = 10;
+	
 	protected T[] mData;
 	protected int mSize;
 	
     @SuppressWarnings("unchecked")
     public TabellMengde() {
-        this.mData = (T[]) new Object[10]; 
+    	this(DEFAULT_INITIAL_CAPACITY);
+    }
+    
+    @SuppressWarnings("unchecked")
+    public TabellMengde(int initialCapacity) {
+        this.mData = (T[]) new Object[initialCapacity]; 
         this.mSize = 0;
     }
+    
 
     
     /*
@@ -206,8 +214,9 @@ public class TabellMengde<T> implements MengdeADT<T>{
 			return;
 		}
 		
+		// resize array if needed
 		if (mSize >= mData.length) {
-			mData = Arrays.copyOf(mData, mData.length * 2);
+			mData = Arrays.copyOf(mData, Math.max(1, mData.length * 2));
 		}
 		
 		mData[mSize++] = element;
@@ -271,7 +280,6 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	@Override
 	public T[] toArray(T[] a) {
 		return Arrays.copyOf(mData, mSize, (Class<? extends T[]>) a.getClass());
-		//return Arrays.copyOf(mData, mSize, (Class<? extends T[]>) a.getClass());
 	}	
 	
 	/**
@@ -285,6 +293,7 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	/**
 	 * 
 	 */
+	/*
 	public static <T> MengdeADT<T> createFromArray(T[] arr) {
 		if(arr == null) {
 			throw new NullPointerException();
@@ -299,6 +308,7 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	public Set<T> toJavaSet() {
 		return new HashSet<T>(Arrays.asList(toArray()));
 	}
+	*/
 	
 	
 	/**
