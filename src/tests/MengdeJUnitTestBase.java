@@ -41,26 +41,13 @@ import adt.MengdeADT;
 abstract public class MengdeJUnitTestBase {
 	abstract <T> MengdeADT<T> realMakeSet(T[] a);
 	
+	
+	/*
+	 * 
+	 */
+	
 	protected MengdeADT<Integer> makeSet(Integer ... values) { return realMakeSet(values); }
-	/*
-	protected MengdeADT<Integer> makeSet() { return makeSet(new Integer[] {}); }
-	protected MengdeADT<Integer> makeSet(Integer a) { return makeSet(new Integer[] {a}); }
-	protected MengdeADT<Integer> makeSet(Integer a, Integer b) { return makeSet(new Integer[] {a,b}); }
-	protected MengdeADT<Integer> makeSet(Integer a, Integer b, Integer c) { return makeSet(new Integer[] {a,b,c}); }
-	protected MengdeADT<Integer> makeSet(Integer a, Integer b, Integer c, Integer d) { return makeSet(new Integer[] {a,b,c,d}); }
-	protected MengdeADT<Integer> makeSet(Integer a, Integer b, Integer c, Integer d, Integer e) { return makeSet(new Integer[] {a,b,c,d,e}); }
-	*/
-
- 
 	protected Integer[] makeArray(Integer ... values) { return values; }
-	/*
-	protected Integer[] makeArray(Integer a) { return new Integer[] {a}; }
-	protected Integer[] makeArray(Integer a, Integer b) { return new Integer[] {a,b}; }
-	protected Integer[] makeArray(Integer a, Integer b, Integer c) { return new Integer[] {a,b,c}; }
-	protected Integer[] makeArray(Integer a, Integer b, Integer c, Integer d) { return new Integer[] {a,b,c,d}; }
-	protected Integer[] makeArray(Integer a, Integer b, Integer c, Integer d, Integer e) { return new Integer[] {a,b,c,d,e}; }
-	protected Integer[] makeArray(Integer a, Integer b, Integer c, Integer d, Integer e, Integer f) { return new Integer[] {a,b,c,d,e,f}; }
-	*/
 	
 
 	/*
