@@ -290,16 +290,17 @@ public class TabellMengde<T> implements MengdeADT<T>{
 		return mSize;
 	}
 	
+	
 	/**
 	 * 
 	 */
-	/*
+
 	public static <T> MengdeADT<T> createFromArray(T[] arr) {
 		if(arr == null) {
 			throw new NullPointerException();
 		}
 		
-		MengdeADT<T> set = new LenketMengde<>();
+		MengdeADT<T> set = new TabellMengde<>();
 		for (var e : arr)
 			set.add(e);
 		return set;
@@ -308,7 +309,6 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	public Set<T> toJavaSet() {
 		return new HashSet<T>(Arrays.asList(toArray()));
 	}
-	*/
 	
 	
 	/**

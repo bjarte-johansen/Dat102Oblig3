@@ -16,7 +16,7 @@ class TestJavaSetToMengde extends MengdeJUnitTestBase{
 	 * override makeSet method for our class
 	 */	
 	
-	protected <T> MengdeADT<T> makeSet(T[] arr) {
+	protected <T> MengdeADT<T> realMakeSet(T[] arr) {
 		MengdeADT<T> set = new JavaSetToMengde<T>();
 		if(arr != null) {
 			for (T e : arr) {
