@@ -82,9 +82,14 @@ public class TabellMengde<T> implements MengdeADT<T>{
 			throw new NullPointerException();			
 		}
 		
+		// try early exit
 		if(isEmpty()) {
 			return true;
 		}
+		
+		// try early exit
+		if(count() > other.count())
+			return false;		
 		
 		for (int i = 0; i < mSize; i++) {
 			T e = mData[i];

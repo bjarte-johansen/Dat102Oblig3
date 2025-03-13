@@ -73,7 +73,6 @@ public class Main {
 		intHashSet = new HashSet<Integer>();
 		randValueArray = new Integer[numElementsToSearchFor];
 		
-		
 		// populate set & array
 		int tall = 376; // Her kan vi bruke eit vilkårleg tal
 		for (int i = 0; i < numElements; i++){
@@ -132,10 +131,12 @@ public class Main {
 	 */
 	
 	static public void performTests(int numTestIterations, int numElements, int numSearchElements) {
-		System.out.println("# " 
+		System.out.println(
+			"# " 
 			+ int2SnakeString(numTestIterations) 
 			+ " iterations of (find " + int2SnakeString(numSearchElements) + " elements"
-			+ " amongst " + int2SnakeString(numElements) + " elements)");
+			+ " amongst " + int2SnakeString(numElements) + " elements)"
+			);
 		
 		// intitialize set/array/values to search for
 		init(numElements, numSearchElements);
@@ -147,6 +148,7 @@ public class Main {
 			findCountBinarySearch(randValueArray);			
 		}
 		
+		// setup variables & test
 		int found = 0;
 		long hashSetTime;
 		long binarySearchTime;
@@ -158,7 +160,10 @@ public class Main {
 				found = findCountHashSetEntries(randValueArray);
 			}
 			long t2 = System.currentTimeMillis();
-			hashSetTime = t2 - t1;			
+			hashSetTime = t2 - t1;
+
+			// print time and number of found elements, found should be equal to numSearchElements			
+			System.out.println("HashSet: " + (hashSetTime) + " ms, found: " + found);				
 		}
 
 		{
@@ -168,12 +173,13 @@ public class Main {
 				found = findCountBinarySearch(randValueArray);
 			}
 			long t2 = System.currentTimeMillis();
-			binarySearchTime = t2 - t1;			
-		}
-
-		System.out.println("HashSet: " + (hashSetTime) + " ms, found: " + found);		
-		System.out.println("BinarySearch: " + (binarySearchTime) + " ms, found: " + found);		
+			binarySearchTime = t2 - t1;
+			
+			// print time and number of found elements, found should be equal to numSearchElements
+			System.out.println("BinarySearch: " + (binarySearchTime) + " ms, found: " + found);				
+		}	
 		
+		// print runtime ratio
 		if (hashSetTime != 0 && binarySearchTime != 0) {
 			System.out.println("HashSet is " + String.format("%.1f", binarySearchTime/(double)hashSetTime).replace(",", ".") + " times faster than BinarySearch");
 		}

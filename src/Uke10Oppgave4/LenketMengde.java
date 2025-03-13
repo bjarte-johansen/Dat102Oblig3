@@ -109,6 +109,11 @@ public class LenketMengde<T> implements MengdeADT<T>{
 		}
 		
 		// try early exit
+		if(isEmpty()) {
+			return true;
+		}
+		
+		// try early exit
 		if(count() > other.count())
 			return false;
 		
