@@ -1,4 +1,4 @@
-package Oppgave4;
+package Uke10Oppgave4;
 
 import java.util.Arrays;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package Oppgave4;
+package Uke10Oppgave4;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.ParameterizedType;
@@ -11,46 +11,29 @@ import adt.MengdeADT;
 
 import java.util.Set;
  
-public class TabellMengde<T> implements MengdeADT<T>{
-	static final int DEFAULT_INITIAL_CAPACITY = 10;
-	
-	protected T[] mData;
-	protected int mSize;
+public class JavaSetToMengde<T> implements MengdeADT<T>{
+	protected java.util.Set<T> mStorage;
 	
     @SuppressWarnings("unchecked")
-    public TabellMengde() {
-    	this(DEFAULT_INITIAL_CAPACITY);
+    public JavaSetToMengde() {
+        mStorage = new HashSet<T>();
     }
-    
-    @SuppressWarnings("unchecked")
-    public TabellMengde(int initialCapacity) {
-        this.mData = (T[]) new Object[initialCapacity]; 
-        this.mSize = 0;
-    }
-    
 
-    
+
     /*
      * @return Hashcode for mengden
-     */
+     */    
 	public int hashCode() {
-		int hashCode = 0;
-		
-		for (int i = 0; i < mSize; i++) {
-			if (mData[i] != null) {
-				hashCode += mData[i].hashCode();
-			}
-		}
-		
-		return hashCode;
+		return mStorage.hashCode();
 	}
+    
 	
 	/**
 	 * @return Om mengden er tom
 	 */
 	@Override
 	public boolean isEmpty() {
-		return count() == 0;
+		return mStorage.isEmpty();
 	}
 	
 	/**
@@ -59,17 +42,7 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public boolean contains(T element) {
-        for (int i=0; i<mSize; i++) {
-        	T e = mData[i];
-			if(e == null) {
-				if(element == null) {
-					return true;
-				}
-			}else if(e.equals(element)) {
-				return true;
-			}
-		}
-		return false;
+		return mStorage.contains(element);
 	}
 	
 	/**
@@ -79,15 +52,10 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	@Override
 	public boolean isSubsetOf(MengdeADT<T> other) {
 		if (other == null) {
-			throw new NullPointerException();			
+			throw new NullPointerException();
 		}
 		
-		if(isEmpty()) {
-			return true;
-		}
-		
-		for (int i = 0; i < mSize; i++) {
-			T e = mData[i];
+		for(var e : mStorage) {
 			if (!other.contains(e)) {
 				return false;
 			}
@@ -123,11 +91,9 @@ public class TabellMengde<T> implements MengdeADT<T>{
 		// empty but it is not as fast, as it checks all elements
 		//return intersection(other).isEmpty();
 		
-		// iterate over all elements		
-        for (int i=0; i<mSize; i++) {
-        	T e = mData[i];
+		for(var e : mStorage) {
 			if (other.contains(e)) {
-				return false;
+                return false;
 			}
 		}
 		
@@ -145,13 +111,12 @@ public class TabellMengde<T> implements MengdeADT<T>{
 		if (other == null) {
 			throw new NullPointerException();			
 		}
+			
+		MengdeADT<T> result = new JavaSetToMengde<T>();
 		
-		MengdeADT<T> result = new TabellMengde<T>();
-		
-		for (int i=0; i<mSize; i++) {
-			T e = mData[i];
+		for(var e : mStorage) {
 			if (other.contains(e)) {
-				result.add(e);
+                result.add(e);
 			}
 		}
 		
@@ -170,7 +135,7 @@ public class TabellMengde<T> implements MengdeADT<T>{
 			throw new NullPointerException();
 		}
 		
-		MengdeADT<T> result = new TabellMengde<T>();
+		MengdeADT<T> result = new JavaSetToMengde<T>();
 		
 		result.addAllFrom(this);
 		result.addAllFrom(other);
@@ -190,15 +155,14 @@ public class TabellMengde<T> implements MengdeADT<T>{
 			throw new NullPointerException();
 		}
 		
-		MengdeADT<T> result = new TabellMengde<T>();
+		MengdeADT<T> result = new JavaSetToMengde<T>();
 		
-        for (int i=0; i<mSize; i++) {
-        	T e = mData[i];
+		for(var e : mStorage) {
 			if (!other.contains(e)) {
-				result.add(e);
+                result.add(e);
 			}
 		}
-		
+
 		return result;
 	}
 	
@@ -210,16 +174,7 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public void add(T element) {
-		if (contains(element)) {
-			return;
-		}
-		
-		// resize array if needed
-		if (mSize >= mData.length) {
-			mData = Arrays.copyOf(mData, Math.max(1, mData.length * 2));
-		}
-		
-		mData[mSize++] = element;
+		mStorage.add(element);
 	}
 	
 	/**
@@ -230,12 +185,8 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public void addAllFrom(MengdeADT<T> other) {
-		if (other == null) {
-			throw new NullPointerException();
-		}
-		
-		T[] otherArr = other.toArray();
-		for (T e : otherArr) {
+		T[] tmp = other.toArray();
+		for (var e : tmp) {
 			add(e);
 		}
 	}
@@ -249,17 +200,8 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	 */
 	@Override
 	public T remove(T element) {
-		for(int i=0; i<mSize; i++) {
-			if(mData[i].equals(element)) {
-				T result = mData[i];
-				mData[i] = mData[mSize - 1];
-				mData[mSize - 1] = null;
-				mSize--;
-				return result;
-			}
-		}
-		
-		return null;
+		T tmp = element;
+		return mStorage.remove(element) ? tmp : null;
 	}
 	
 	/**
@@ -269,7 +211,7 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public T[] toArray() {
-		return Arrays.copyOf(mData, mSize);
+		return (T[]) mStorage.toArray();
 	}
 	
 	/**
@@ -279,7 +221,7 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public T[] toArray(T[] a) {
-		return Arrays.copyOf(mData, mSize, (Class<? extends T[]>) a.getClass());
+		return (T[]) mStorage.toArray(a);
 	}	
 	
 	/**
@@ -287,7 +229,7 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	 */
 	@Override	
 	public int count() {
-		return mSize;
+		return mStorage.size();
 	}
 	
 	
@@ -300,7 +242,7 @@ public class TabellMengde<T> implements MengdeADT<T>{
 			throw new NullPointerException();
 		}
 		
-		MengdeADT<T> set = new TabellMengde<>();
+		MengdeADT<T> set = new JavaSetToMengde<>();
 		for (var e : arr)
 			set.add(e);
 		return set;

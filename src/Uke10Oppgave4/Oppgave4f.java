@@ -1,7 +1,7 @@
-package Oppgave4;
+package Uke10Oppgave4;
 
+import Uke10Oppgave4.*;
 import adt.MengdeADT;
-import Oppgave4.*;
 
 class Person{
 	String name;

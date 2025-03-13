@@ -7,7 +7,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import Oppgave4.*;
+import Uke10Oppgave4.*;
 import adt.MengdeADT;
 
 
