@@ -260,4 +260,25 @@ public class JavaSetToMengde<T> implements MengdeADT<T>{
 	public String toString() {
 		return Arrays.toString(toArray());
 	}
+	
+	
+	
+	/*
+	 * for evt norspråklig enhetstest
+	 */
+	
+	public boolean erTom() { return isEmpty(); } 
+	public boolean inneholder(T element) { return contains(element); }
+	public boolean erDelmengdeAv(MengdeADT<T> other) { return isSubsetOf(other); }
+	public boolean erLik(MengdeADT<T> other)  { return isEqual(other); }
+	public boolean erDisjunkt(MengdeADT<T> other) { return isDisjoint(other); }
+	public MengdeADT<T> snitt(MengdeADT<T> other) { return intersection(other); }
+	//public MengdeADT<T> union(MengdeADT<T> other);
+	public MengdeADT<T> minus(MengdeADT<T> other){ return difference(other); }
+	public void leggTil(T element) { add(element); }
+	public void leggTilAlleFra(MengdeADT<T> other) { addAllFrom(other); }
+	public T fjern(T element) { return remove(element); }
+	public T[] tilTabell() { return toArray(); }
+	public T[] tilTabell(T[] a) { return toArray(a); }
+	public int antallElementer() { return count(); }	
 }

@@ -95,6 +95,25 @@ public interface MengdeADT<T> {
 	/**
 	 * @return Antall elementer i mengden.
 	 */
-	int count();
+	int count();	
 	
+	
+	
+	/**
+	 * for evt norspråklig enhetstest
+	 */
+	boolean erTom();
+	boolean inneholder(T element);
+	boolean erDelmengdeAv(MengdeADT<T> other);
+    boolean erLik(MengdeADT<T> other);
+	boolean erDisjunkt(MengdeADT<T> other);
+	MengdeADT<T> snitt(MengdeADT<T> other);
+	//MengdeADT<T> union(MengdeADT<T> other);
+	MengdeADT<T> minus(MengdeADT<T> other);
+	void leggTil(T element);
+	void leggTilAlleFra(MengdeADT<T> other);
+	T fjern(T element);
+	T[] tilTabell();
+	T[] tilTabell(T[] a);	
+	int antallElementer();	
 }
